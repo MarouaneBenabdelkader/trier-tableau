@@ -1,43 +1,53 @@
 ﻿using System;
 namespace trier_tableau
 {
-    internal class Program
+    public class Program
     {
+        public static void AddElement(int[] tab, int number)
+        {
+            int tmp = 0, tmp2;
+            bool flagg = false;
+            for (int i = 0; i < tab.Length ; i++)
+            {
+                if (flagg)
+                {
+                    tmp2 = tab[i];
+                    tab[i] = tmp;
+                    tmp = tmp2;
+                }
+                if (number < tab[i] && !flagg)
+                {
+                    tmp = tab[i];
+                    tab[i] = number;
+                    flagg = true;
+                }
+            }
+            if (!flagg)
+            {
+                tab[tab.Length - 1] = number;
+            }
+        }
         static void Main(string[] args)
         {
-            int[] tab = new int[6];
-            tab[0] = 11; 
-            tab[1] = 1;
-            tab[2] = 10;
-            tab[3] = 4;
-            tab[4] = 7;
-            
-            Array.Sort(tab);
+            int[] tab = new int[8];
+            tab[0] = 1; 
+            tab[1] = 6;
+            tab[2] = 8;
+            tab[3] = 9;
+            tab[4] = 11;
+            tab[5] = 13;
+            tab[6] = 14;
             int number;
             do
             {
                 Console.WriteLine("entrez un nombre");
 
             } while (!int.TryParse(Console.ReadLine(), out number));
-            for (int i = 4; i >= 0; i--)
-            {
-  
-                if (number > tab[i] )
-                {
-                    
-                 for(int j = 5; j > i ; j--)
-                    {   
-                        
-                        tab[j] = tab[j - 1];
 
-                    }
-                 tab[i + 1] = number;
-                    break;
-                }
-            }
-            for (int i = 0; i < 6; i++)
+            AddElement(tab, number);
+            for (int j = 0; j < 8 ; j++)
             {
-                Console .WriteLine(tab[i]);
+                Console .WriteLine ( "N ["  + j + " ] " +tab[j]);
             }
 
         }
